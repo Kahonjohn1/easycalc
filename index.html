@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EasyCalc - Product Calculator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="calculator-container">
+    <section class="calculator-card" aria-labelledby="app-title">
+      <!-- Calculator Header -->
+      <header class="calculator-header">
+        <h1 id="app-title" class="app-title">EasyCalc</h1>
+        <p class="app-subtitle">Product Price &amp; Quantity Calculator</p>
+        <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+          <span class="theme-icon-sun" aria-hidden="true">&#9788;</span>
+          <span class="theme-icon-moon" aria-hidden="true">&#9790;</span>
+        </button>
+      </header>
+
+      <!-- Product Image Slider -->
+      <section class="product-slider" aria-label="Product showcase">
+        <div class="slider-viewport">
+          <div class="slider-track" id="slider-track"></div>
+        </div>
+        <div class="slider-dots" id="slider-dots"></div>
+      </section>
+
+      <!-- Calculator Form -->
+      <form class="calculator-form" id="calculator-form">
+        <!-- 1. Product Selection -->
+        <div class="form-group">
+          <label for="product-select" class="form-label">Select Product</label>
+          <select id="product-select" class="form-input form-select">
+            <option value="" disabled selected>Choose a product</option>
+          </select>
+        </div>
+
+        <!-- 2. Price (auto-filled, readonly) -->
+        <div class="form-group">
+          <label for="product-price" class="form-label">Price</label>
+          <div class="input-wrapper">
+            <span class="currency-prefix" aria-hidden="true">₦</span>
+            <input 
+              type="text" 
+              id="product-price" 
+              name="product-price" 
+              class="form-input with-prefix" 
+              placeholder="0.00" 
+              readonly
+            >
+          </div>
+        </div>
+
+        <!-- 3. Quantity -->
+        <div class="form-group">
+          <label for="product-quantity" class="form-label">Quantity</label>
+          <input 
+            type="number" 
+            id="product-quantity" 
+            name="product-quantity" 
+            class="form-input" 
+            placeholder="1" 
+            min="1" 
+            step="1"
+          >
+        </div>
+
+        <!-- 4. Add Product Button -->
+        <div class="form-group action-group">
+          <button 
+            type="button" 
+            id="add-btn" 
+            class="btn-calculate"
+          >
+            Add Product
+          </button>
+        </div>
+      </form>
+
+      <!-- Error Message -->
+      <div id="error-message" class="error-message"></div>
+
+      <!-- Selected Products List -->
+      <div id="selected-section" class="selected-section hidden">
+        <h3 class="section-heading">Selected Products</h3>
+        <ul id="selected-products-list" class="selected-products-list"></ul>
+      </div>
+
+      <!-- Action Buttons: Calculate & Clear -->
+      <div class="action-buttons">
+        <button type="button" id="calculate-btn" class="btn-calculate">Calculate Total</button>
+        <button type="button" id="clear-btn" class="btn-clear">Clear</button>
+      </div>
+
+      <!-- 5. Results Display -->
+      <footer class="total-result-card" aria-live="polite">
+        <div class="result-row">
+          <span class="result-label">Subtotal</span>
+          <span id="subtotal-value" class="result-value">₦0.00</span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">Discount (10%)</span>
+          <span id="discount-value" class="result-value">₦0.00</span>
+        </div>
+        <hr class="result-divider">
+        <div class="result-row result-final">
+          <span class="result-label">Final Total</span>
+          <span id="total-result" class="result-value total-value">₦0.00</span>
+        </div>
+      </footer>
+    </section>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>

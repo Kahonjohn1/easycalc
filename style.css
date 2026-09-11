@@ -1,0 +1,631 @@
+/* ==========================================================================
+   EasyCalc - Modern Product Calculator Styling
+   Color Palette: Light-Blue & White Theme with Dark Navy Typography
+   ========================================================================== */
+
+/* 1. Global Reset & Box Sizing */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  /* Color Palette */
+  --bg-page: #edf4fb;
+  --bg-card: #ffffff;
+  --bg-input: #ffffff;
+  --bg-result: #f0f7ff;
+  
+  --border-card: #dbe7f4;
+  --border-input: #cbd9e8;
+  --border-focus: #0284c7;
+  --border-result: #cbe0f6;
+
+  /* Typography Colors (Dark Navy Hierarchy) */
+  --text-primary: #0b1f3a;     /* Deep dark navy */
+  --text-secondary: #2b4566;   /* Medium navy */
+  --text-muted: #57708e;       /* Muted slate navy */
+  --text-prefix: #415f83;
+
+  /* Interactive / Button */
+  --btn-bg: #0284c7;
+  --btn-bg-hover: #0369a1;
+  --btn-bg-active: #075985;
+  --btn-text: #ffffff;
+  --btn-shadow: 0 4px 14px rgba(2, 132, 199, 0.3);
+  --btn-shadow-hover: 0 6px 18px rgba(2, 132, 199, 0.4);
+
+  /* Elevation Shadows */
+  --card-shadow: 0 12px 32px rgba(11, 31, 58, 0.08), 0 2px 8px rgba(11, 31, 58, 0.04);
+  --focus-ring: 0 0 0 3px rgba(2, 132, 199, 0.2);
+
+  /* Border Radii */
+  --radius-card: 16px;
+  --radius-element: 10px;
+  --radius-result: 12px;
+
+  /* Typography */
+  --font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+
+  /* Transition for theme switching */
+  --transition-theme: background-color 0.35s ease, color 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+/* ---- Dark Mode Variables ---- */
+body.dark-mode {
+  --bg-page: #0f1729;
+  --bg-card: #1a2340;
+  --bg-input: #1e2a4a;
+  --bg-result: #162035;
+
+  --border-card: #2a3a5c;
+  --border-input: #34466a;
+  --border-focus: #38bdf8;
+  --border-result: #2a3a5c;
+
+  --text-primary: #e8edf5;
+  --text-secondary: #a3b4d0;
+  --text-muted: #7a8fb5;
+  --text-prefix: #8da2c0;
+
+  --btn-bg: #0ea5e9;
+  --btn-bg-hover: #38bdf8;
+  --btn-bg-active: #0284c7;
+  --btn-text: #ffffff;
+  --btn-shadow: 0 4px 14px rgba(14, 165, 233, 0.25);
+  --btn-shadow-hover: 0 6px 18px rgba(14, 165, 233, 0.35);
+
+  --card-shadow: 0 12px 32px rgba(0, 0, 0, 0.35), 0 2px 8px rgba(0, 0, 0, 0.2);
+  --focus-ring: 0 0 0 3px rgba(56, 189, 248, 0.25);
+}
+
+/* 2. Base Page Layout */
+body {
+  font-family: var(--font-family);
+  background: linear-gradient(135deg, #f0f6fd 0%, #e3eef9 100%);
+  color: var(--text-primary);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem 1rem;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: var(--transition-theme);
+}
+
+body.dark-mode {
+  background: linear-gradient(135deg, #0b1222 0%, #0f1729 100%);
+}
+
+/* 3. Centered Calculator Container */
+.calculator-container {
+  width: 100%;
+  max-width: 440px;
+  display: flex;
+  justify-content: center;
+}
+
+/* 4. Calculator Card */
+.calculator-card {
+  width: 100%;
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-card);
+  box-shadow: var(--card-shadow);
+  padding: 2.25rem 2rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.35s ease, border-color 0.35s ease;
+}
+
+/* 5. Header Section */
+.calculator-header {
+  text-align: center;
+  margin-bottom: 1.75rem;
+}
+
+.app-title {
+  font-size: 1.85rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.025em;
+  margin-bottom: 0.35rem;
+}
+
+.app-subtitle {
+  font-size: 0.925rem;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+/* 6. Form & Inputs */
+.calculator-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-label {
+  font-size: 0.925rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.75rem 0.95rem;
+  font-size: 1rem;
+  font-family: inherit;
+  color: var(--text-primary);
+  background-color: var(--bg-input);
+  border: 1.5px solid var(--border-input);
+  border-radius: var(--radius-element);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.35s ease, color 0.35s ease;
+  outline: none;
+}
+
+.form-input::placeholder {
+  color: var(--text-muted);
+}
+
+.form-input:focus {
+  border-color: var(--border-focus);
+  box-shadow: var(--focus-ring);
+}
+
+/* Price Input with Naira Symbol Wrapper */
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.currency-prefix {
+  position: absolute;
+  left: 0.95rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-prefix);
+  pointer-events: none;
+}
+
+.form-input.with-prefix {
+  padding-left: 2.2rem;
+}
+
+/* 7. Action Button */
+.action-group {
+  margin-top: 0.5rem;
+}
+
+.btn-calculate {
+  width: 100%;
+  padding: 0.875rem 1.5rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: var(--btn-text);
+  background-color: var(--btn-bg);
+  border: none;
+  border-radius: var(--radius-element);
+  box-shadow: var(--btn-shadow);
+  cursor: pointer;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.1s ease;
+}
+
+.btn-calculate:hover {
+  background-color: var(--btn-bg-hover);
+  box-shadow: var(--btn-shadow-hover);
+}
+
+.btn-calculate:active {
+  background-color: var(--btn-bg-active);
+  transform: translateY(1px);
+}
+
+/* 8. Total Result Display */
+.total-result-card {
+  margin-top: 1.75rem;
+  padding: 1.25rem;
+  background-color: var(--bg-result);
+  border: 1px solid var(--border-result);
+  border-radius: var(--radius-result);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  transition: var(--transition-theme);
+}
+
+.total-heading {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+}
+
+.total-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.015em;
+}
+
+/* 9. Responsive Breakpoints */
+@media (max-width: 480px) {
+  body {
+    padding: 1rem 0.75rem;
+  }
+
+  .calculator-card {
+    padding: 1.75rem 1.25rem;
+  }
+
+  .app-title {
+    font-size: 1.65rem;
+  }
+
+  .total-value {
+    font-size: 1.75rem;
+  }
+}
+
+/* 10. Product Select Dropdown */
+.form-select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2357708e' d='M6 8.825a.5.5 0 0 1-.354-.146l-4-4a.5.5 0 0 1 .708-.708L6 7.617l3.646-3.646a.5.5 0 0 1 .708.708l-4 4A.5.5 0 0 1 6 8.825z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.95rem center;
+  background-size: 12px;
+  padding-right: 2.5rem;
+  cursor: pointer;
+}
+
+.form-input[readonly] {
+  cursor: default;
+  background-color: #f6f9fc;
+}
+
+body.dark-mode .form-input[readonly] {
+  background-color: #141d36;
+}
+
+.form-input[readonly]:focus {
+  border-color: var(--border-input);
+  box-shadow: none;
+}
+
+/* 11. Error Message */
+.error-message {
+  display: none;
+  margin-top: 1.1rem;
+  padding: 0.6rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-align: center;
+  color: #b91c1c;
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: var(--radius-element);
+  transition: var(--transition-theme);
+}
+
+body.dark-mode .error-message {
+  color: #fca5a5;
+  background-color: #3b1520;
+  border-color: #7f1d1d;
+}
+
+.error-message.visible {
+  display: block;
+}
+
+/* 12. Selected Products Section */
+.selected-section {
+  margin-top: 1.5rem;
+}
+
+.selected-section.hidden {
+  display: none;
+}
+
+.section-heading {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+  margin-bottom: 0.75rem;
+}
+
+.selected-products-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.selected-product-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 0.85rem;
+  background-color: var(--bg-result);
+  border: 1px solid var(--border-result);
+  border-radius: var(--radius-element);
+  font-size: 0.925rem;
+  transition: var(--transition-theme);
+}
+
+.product-item-info {
+  color: var(--text-primary);
+  font-weight: 600;
+  word-break: break-word;
+}
+
+.btn-remove {
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: #b91c1c;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.btn-remove:hover {
+  background-color: #fee2e2;
+}
+
+/* 13. Action Buttons (Calculate & Clear) */
+.action-buttons {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+.action-buttons .btn-calculate {
+  flex: 2;
+}
+
+.btn-clear {
+  flex: 1;
+  padding: 0.875rem 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: var(--text-secondary);
+  background-color: transparent;
+  border: 1.5px solid var(--border-input);
+  border-radius: var(--radius-element);
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease, background-color 0.35s ease;
+}
+
+.btn-clear:hover {
+  border-color: var(--text-secondary);
+  color: var(--text-primary);
+}
+
+.btn-clear:active {
+  transform: translateY(1px);
+}
+
+/* 14. Results Breakdown */
+.result-row {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.3rem 0;
+}
+
+.result-label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.result-value {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.result-divider {
+  width: 100%;
+  border: none;
+  border-top: 1px solid var(--border-result);
+  margin: 0.5rem 0;
+}
+
+.result-final .result-label {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.result-final .result-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* 15. Responsive tweaks for new sections */
+@media (max-width: 480px) {
+  .action-buttons {
+    flex-direction: column;
+  }
+
+  .action-buttons .btn-calculate,
+  .btn-clear {
+    width: 100%;
+    flex: 1;
+  }
+}
+
+/* ==========================================================================
+   EasyCalc - Product Image Slider
+   Auto-changing slideshow built with plain CSS transitions
+   ========================================================================== */
+
+.product-slider {
+  margin-bottom: 1.75rem;
+}
+
+.slider-viewport {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background-color: var(--bg-result);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-result);
+}
+
+.slider-track {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.slider-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.5s ease;
+}
+
+.slider-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.slider-caption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: center;
+  color: #ffffff;
+  background: rgba(11, 31, 58, 0.65);
+}
+
+.slider-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.slider-dot {
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background-color: var(--border-input);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.slider-dot.active {
+  background-color: var(--btn-bg);
+}
+
+.slider-viewport {
+  transition: var(--transition-theme);
+}
+
+/* ---- Dark Mode Tune-ups ---- */
+body.dark-mode .slider-caption {
+  background: rgba(8, 12, 24, 0.7);
+}
+
+body.dark-mode .btn-remove {
+  color: #fca5a5;
+}
+
+body.dark-mode .btn-remove:hover {
+  background-color: #3b1520;
+}
+
+body.dark-mode .form-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%237a8fb5' d='M6 8.825a.5.5 0 0 1-.354-.146l-4-4a.5.5 0 0 1 .708-.708L6 7.617l3.646-3.646a.5.5 0 0 1 .708.708l-4 4A.5.5 0 0 1 6 8.825z'/%3E%3C/svg%3E");
+}
+
+/* ==========================================================================
+   EasyCalc - Light / Dark Mode Toggle
+   ========================================================================== */
+.calculator-header {
+  position: relative;
+}
+
+.theme-toggle {
+  position: absolute;
+  top: 0.25rem;
+  right: 0.5rem;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+  background-color: var(--bg-input);
+  border: 1.5px solid var(--border-input);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: var(--transition-theme);
+}
+
+.theme-toggle:hover {
+  border-color: var(--border-focus);
+  color: var(--text-primary);
+}
+
+.theme-toggle:active {
+  transform: scale(0.96);
+}
+
+.theme-icon-sun,
+.theme-icon-moon {
+  line-height: 1;
+}
+
+/* Show the appropriate icon for the current theme */
+body.dark-mode .theme-icon-sun {
+  display: none;
+}
+
+body:not(.dark-mode) .theme-icon-moon {
+  display: none;
+}
